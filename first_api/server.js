@@ -17,22 +17,22 @@ var books = [
         "title" : "The Destroyer"
     },
     {
-        "id" : "BOO03",
+        "id" : "BO03",
         "title" : "Lord of the Ring"
     },
     {
-        "id" : "BOO04",
+        "id" : "BO04",
         "title" : "Exodia"
     },
 ];
 
-app.get('/', function(request, response) {
+app.get('/books', function(request, response) {
     response.send(books);
 });
 
-app.post('/', function(req, res) {
+app.post('/books', function(req, res) {
     var book = req.body;
-    if (!book || book.title == "") {
+    if (!book || book.title === "") {
         res.status(500).send({error:"Your book must have a title"})
     }
     else 
@@ -40,6 +40,28 @@ app.post('/', function(req, res) {
         books.push(book);
         res.status(200).send(books);
     }
+}),
+
+app.put('/books/:bookID', function(req, res) {
+    var bookID = req.params.bookID;
+    var newtitle = req.body.title;
+    if (!newtitle || newtitle == "") {
+        res.status(500).send({
+            error: "You must provide title"
+        })
+    }
+    else {
+        for ( var i = 0; i < books.length; i++) {
+            var dummy_book = books[i];
+
+            if (dummy_book.id === bookID) {
+                books[i].title = newtitle;
+                break;
+            }
+        }
+        res.send(books);
+    }
+
 }),
 
 app.listen(3000, function() {
