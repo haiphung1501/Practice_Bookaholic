@@ -51,17 +51,23 @@ app.put('/books/:bookID', function(req, res) {
         })
     }
     else {
+        var flag = false;
         for ( var i = 0; i < books.length; i++) {
             var dummy_book = books[i];
 
             if (dummy_book.id === bookID) {
                 books[i].title = newtitle;
+                flag = true;
                 break;
             }
         }
-        res.send(books);
+        if (!flag) {
+            res.status(500).send({error:"Book not found"});
+        }
+        else {
+            res.send(books);
+        }
     }
-
 }),
 
 app.listen(3000, function() {
