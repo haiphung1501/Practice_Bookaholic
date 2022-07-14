@@ -2,14 +2,22 @@ const { response, request } = require('express');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
+var cors = require('cors');
 var mongoose = require('mongoose');
-var db = mongoose.connect('mongodb://localhost/book_api');
+const morgan = require("morgan");
+const dotenv = require("dotenv");
 
+dotenv.config()
+var db = mongoose.connect('process.env.mongoDB_URL', () => {
+    console.log("Connected to MongoDB");
+}) ;
 var Book = require('./model/book');
 var WishList = require('./model/wishList');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(cors());
+app.use(morgan("common"));
 
 app.get('/book', function(req, res) {
     Book.find({}, function(err, books) {
