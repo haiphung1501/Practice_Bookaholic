@@ -18,7 +18,7 @@ app.use(cors());
 app.use(morgan("common"));
 
 //ROUTES
-app.use("/v1/book", bookRoute);
+app.use("/book", bookRoute);
 
 // app.get('/book', function(req, res) {
 //     Book.find({}, function(err, books) {
