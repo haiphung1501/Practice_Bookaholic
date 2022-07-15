@@ -5,7 +5,9 @@ const bookSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-
+    description: {
+        type: String
+    },
     publishedDate: {
         type: String,
     },
@@ -19,5 +21,5 @@ const bookSchema = new mongoose.Schema({
     likes: {type: Number, default: 0}
 });
 
-let Book = mongoose.model("Book", bookSchema)
+let Book = mongoose.model("Book", bookSchema);
 module.exports = {Book};
