@@ -1,10 +1,17 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var ObjectId = mongoose.Schema.Types.ObjectId;
+const mongoose = require('mongoose');
 
-var wishList = new Schema({
-    title: {type: String, default: "Cool Wish List"},
-    books: [{type: ObjectId, ref: 'Book'}]
+const wishList = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }, 
+    books: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Book"
+        },
+    ],
 });
 
-module.exports = mongoose.model('WishList', wishList);
+let WishList = mongoose.model("WistList", wishListSchema);
+module.exports = {WishList};
