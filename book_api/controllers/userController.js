@@ -19,7 +19,7 @@ const userController = {
             res.status(200).json(savedUser);
         }
         catch(err) {
-            res.status(500).json(err);
+            res.status(500).json(err); 
         }
     },
 
@@ -53,8 +53,9 @@ const userController = {
 
     updateWishlist: async(req, res) =>  {
         try {
-            const book = await Book.findOne({_id: req.body.bookId});
-            User.updateOne({$push: {books: book._id}})
+            const book = await Book.findById(req.body.bookId);
+            User.updateOne({$push: {books: book._id}});
+            res.status(200).json("Done");
         } catch (err) {
             res.status(500).json(err);
         }

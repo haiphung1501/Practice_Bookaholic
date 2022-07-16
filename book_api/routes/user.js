@@ -13,6 +13,6 @@ router.put("/:id", userController.updateUser);
 
 router.delete("/:id", userController.deleteUser);
 
-router.put("/:id/wishlist", userController.updateWishlist)
+router.put("/wishlist/:id", userController.updateWishlist)
 
 module.exports = router;
