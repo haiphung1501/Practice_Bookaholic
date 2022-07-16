@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var bookId =  mongoose.Schema.Types.ObjectId;
 
 const wishList = new mongoose.Schema({
     user: {
@@ -7,7 +8,7 @@ const wishList = new mongoose.Schema({
     }, 
     books: [
         {
-            type: mongoose.Schema.Types.ObjectId,
+            type: bookId,
             ref: "Book"
         },
     ],

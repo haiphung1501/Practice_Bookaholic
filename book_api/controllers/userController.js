@@ -1,4 +1,6 @@
 const {User} = require("../model/user");
+const {Book} = require("../model/book");
+const bookController = require("./bookController");
 
 const userController = {
     getAllUser : async (req,res) => {
@@ -45,6 +47,15 @@ const userController = {
             await User.findByIdAndDelete(req.params.id);
             res.status(200).json("Deleted sucessfully");
         } catch(err) {
+            res.status(500).json(err);
+        }
+    },
+
+    updateWishlist: async(req, res) =>  {
+        try {
+            const book = await Book.findOne({_id: req.body.bookId});
+            User.updateOne({$push: {books: book._id}})
+        } catch (err) {
             res.status(500).json(err);
         }
     }
