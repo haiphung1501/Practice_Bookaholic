@@ -6,9 +6,14 @@ const commentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.OBjectId,
         ref: "User"
     },
-
-    info: {
+    
+    description: {
         type: String
+    },
+    
+    commentDate: {
+        type: String,
+        required: true
     },
 });
 
